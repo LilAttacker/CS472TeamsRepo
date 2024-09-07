@@ -4,6 +4,15 @@ import csv
 
 import os
 
+
+# File extensions to ignore from the graphs
+whitelist_file_extensions = [
+    ".java",
+    ".cpp",
+    ".h",
+    ".kt",
+]
+
 if not os.path.exists("data"):
  os.makedirs("data")
 
@@ -38,6 +47,7 @@ def countfiles(dictfiles, lsttokens, repo):
             # break out of the while loop if there are no more commits in the pages
             if len(jsonCommits) == 0:
                 break
+            
             # iterate through the list of commits in  spage
             for shaObject in jsonCommits:
                 sha = shaObject['sha']
@@ -45,10 +55,14 @@ def countfiles(dictfiles, lsttokens, repo):
                 shaUrl = 'https://api.github.com/repos/' + repo + '/commits/' + sha
                 shaDetails, ct = github_auth(shaUrl, lsttokens, ct)
                 filesjson = shaDetails['files']
+
+                # Checks effected in each commit and checks their name is a source file
+                # A soruce file being any file that ends in .java, .kt, .cpp, or .h
                 for filenameObj in filesjson:
                     filename = filenameObj['filename']
-                    dictfiles[filename] = dictfiles.get(filename, 0) + 1
-                    print(filename)
+                    if any(filename.endswith(x) for x in whitelist_file_extensions):
+                        dictfiles[filename] = dictfiles.get(filename, 0) + 1
+                        print(filename)
             ipage += 1
     except:
         print("Error receiving data")
