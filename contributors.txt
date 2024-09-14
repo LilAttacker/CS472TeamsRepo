@@ -1,2 +1,6 @@
 name: David Lam		Email: lam.david459@yahoo.com
-
+name: Caesar Robles Email: caesarrobles26@gmail.com
+name: Josh Richardson Email: richaj12@unlv.nevada.edu
+name: Daniel Pratt		Email: prattd1@unlv.nevada.edu / danielepratt0@gmail.com
+name: Ederic Oytas  Email: oytase1@unlv.nevada.edu / edericoytas@gmail.com
+name: Jae Min Whang  Email: whangj1@unlv.nevada.edu
